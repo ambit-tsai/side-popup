@@ -22,6 +22,9 @@
         header: {
             title: '弹窗1',
         },
+        body: {
+            html: '<h1>Hello World</h1>',
+        },
     });
     popup.openSubPopup({            // 打开一个子弹窗
         header: {
