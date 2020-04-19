@@ -206,6 +206,7 @@
 
     close() {
       this.element.remove();
+      this.element.children('.modal-dialog').not(':first').remove();
     }
     /**
      * 显示弹窗

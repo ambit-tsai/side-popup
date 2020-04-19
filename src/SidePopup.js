@@ -33,6 +33,10 @@ export default class SidePopup {
      */
     close() {
         this.element.remove();
+        this.element
+            .children('.modal-dialog')
+            .not(':first')
+            .remove();
     }
 
 
