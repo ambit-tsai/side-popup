@@ -1,7 +1,6 @@
 import options from './options';
 import $ from 'jquery';
-import styles from './styles.css';
-import {initDialog} from './functions';
+import {initDOM, initDialog, appendStyles} from './functions';
 
 
 export default class SidePopup {
@@ -11,11 +10,11 @@ export default class SidePopup {
 
     constructor(opts) {
         this.options = $.extend(true, opts, options);
-        this.element = initDOM(this.options);
+        this.element = initDOM(this);
         this.element.data(SidePopup.id, this);  // 挂载组件对象到元素上
         this.element.appendTo(document.body);
         if (!$(`style.${SidePopup.id}`).length) {
-            appendStyles();
+            appendStyles(SidePopup.id);
         }
     }
 
@@ -106,29 +105,4 @@ export default class SidePopup {
         const popup = $(param).data(SidePopup.id);
         if (popup) popup.close();
     }
-}
-
-
-
-/**
- * 初始化 DOM
- * @param {object} opts 
- * @returns {jQuery}
- */
-function initDOM(opts) {
-    const $el = $(`<div ${$.map(opts.attrs, (v, k) => `${k}="${v}"`).join(' ')}></div>`);
-    $el.addClass(SidePopup.id);
-    $el.addClass(opts.type === 'left' ? 'left' : 'right');
-    if (opts.addedClass) $el.addClass(opts.addedClass);
-    return $el.append(initDialog(opts));
-}
-
-
-/**
- * 增加样式
- */
-function appendStyles() {
-    let html = `<style class="ID" type="text/css">${styles}</style>`;
-    html = html.replace(/ID/g, SidePopup.id);
-    $(document.body).append(html);
 }

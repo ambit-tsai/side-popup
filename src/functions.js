@@ -1,15 +1,32 @@
 import $ from 'jquery';
+import styles from './styles.css';
+
+
+/**
+ * 初始化 DOM
+ * @param {SidePopup} instance 
+ * @returns {jQuery}
+ */
+export function initDOM(instance) {
+    const opts = instance.options;
+    const $el = $(`<div ${$.map(opts.attrs, (v, k) => `${k}="${v}"`).join(' ')}></div>`);
+    $el.addClass(instance.constructor.id);
+    $el.addClass(opts.type === 'left' ? 'left' : 'right');
+    if (opts.addedClass) $el.addClass(opts.addedClass);
+    return $el.append(initDialog(opts, instance));
+}
 
 
 /**
  * 初始化 modal-dialog
  * @param {object} opts 
+ * @param {SidePopup} instance 
  * @returns {jQuery}
  */
-export function initDialog(opts) {
+export function initDialog(opts, instance) {
     const $content = $('<div class="modal-content"></div>');
     if (opts.header.show) {
-        $content.append(initHeader(opts.header));
+        $content.append(initHeader(opts.header, instance));
     }
     if (opts.body.show) {
         $content.append(initBody(opts.body));
@@ -30,21 +47,28 @@ export function initDialog(opts) {
 /**
  * 初始化 modal-header
  * @param {object} opts 
+ * @param {SidePopup} instance 
  * @returns {jQuery}
  */
-function initHeader(opts) {
-    let html = `<${opts.tag} ${$.map(opts.attrs, (v, k) => `${k}="${v}"`).join(' ')}>`;
+function initHeader(opts, instance) {
+    const $header = $(`<${opts.tag} ${$.map(opts.attrs, (v, k) => `${k}="${v}"`).join(' ')}></${opts.tag}>`);
     if (opts.showCloseBtn) {
-        html += '<button class="close" data-dismiss="modal" type="button">&times;</button>';
+        const $btn = $('<button class="close" type="button">&times;</button>');
+        if (instance) {
+            $btn.click(_ => instance.close());
+        } else {
+            $btn.click(function () {
+                $header.parent().parent().remove();
+            });
+        }
+        $header.append($btn);
     }
     if (opts.title) {
-        html += `<h4 class="modal-title">${opts.title}</h4>`;
+        $header.append(`<h4 class="modal-title">${opts.title}</h4>`);
     }
-    html += `</${opts.tag}>`;
-    const $el = $(html);
-    if (opts.addedClass) $el.addClass(opts.addedClass);
-    if (opts.html) $el.append(opts.html);
-    return $el;
+    if (opts.addedClass) $header.addClass(opts.addedClass);
+    if (opts.html) $header.append(opts.html);
+    return $header;
 }
 
 
@@ -74,4 +98,15 @@ function initButtons($parent, opts) {
         if (item.onClick) $btn.click(item.onClick);
         $parent.append($btn);
     });
+}
+
+
+/**
+ * 增加样式
+ * @param {string} id 
+ */
+export function appendStyles(id) {
+    let html = `<style class="ID" type="text/css">${styles}</style>`;
+    html = html.replace(/ID/g, id);
+    $(document.body).append(html);
 }
