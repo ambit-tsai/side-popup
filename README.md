@@ -1,29 +1,41 @@
 # 侧边弹窗
+侧边弹窗组件，基于 Bootstrap v3
 
 
 #### 安装
-```html
-```
+1. 使用NPM：`npm install -S side-popup`
+1. 直接下载：<a href="dist/side-popup.min.js" target="_blank">压缩版</a>
 
 
-#### 用法
+#### 示例
+用法 1
 ```html
 <link href="path/to/bootstrap-v3.css" rel="stylesheet">
 <script src="path/to/jquery.js" type="text/javascript"></script>
 <script src="path/to/bootstrap-v3.js" type="text/javascript"></script>
 <script src="path/to/side-popup.min.js" type="text/javascript"></script>
 <script type="text/javascript">
-    var popup = SidePopup.open({
+    var popup = SidePopup.open({    // 打开一个侧弹窗
+        attrs: {
+            id: 'myPopup',
+        },
         header: {
             title: '弹窗1',
         },
     });
-    popup.openSubPopup({
+    popup.openSubPopup({            // 打开一个子弹窗
         header: {
             title: '弹窗2',
         },
     });
+    popup.closeSubPopup();          // 关闭子弹窗
+    popup.close();                  // 关闭侧弹窗
 </script>
+```
+用法 2
+```javascript
+SidePopup.open('#myPopup');         // 打开指定弹窗
+SidePopup.close('#myPopup');        // 关闭指定弹窗
 ```
 
 
@@ -41,30 +53,30 @@
 |addedClass|string||附加的 CSS 类|
 |attrs|object|{<br>&nbsp;&nbsp;class: 'modal',<br>&nbsp;&nbsp;tabindex: '-1'<br>}|配置弹窗元素的属性|
 |header|object|{...}|header 的配置项|
-|header.show|boolean|true|是否显示 header|
-|header.tag|string|"div"|HTML 标签|
-|header.addedClass|string||附加的 CSS 类|
-|header.showCloseBtn|boolean|true|是否显示关闭按钮|
-|header.title|string||标题|
-|header.html|string/Element/jQuery||附加的内容|
-|header.attrs|object|{class: 'modal-header'}|配置 header 元素的属性|
+|*header*.show|boolean|true|是否显示 header|
+|*header*.tag|string|"div"|HTML 标签|
+|*header*.addedClass|string||附加的 CSS 类|
+|*header*.showCloseBtn|boolean|true|是否显示关闭按钮|
+|*header*.title|string||标题|
+|*header*.html|string/Element/jQuery||附加的内容|
+|*header*.attrs|object|{class: 'modal-header'}|配置 header 元素的属性|
 |body|object|{...}|body 的配置项|
-|body.show|boolean|true|是否显示 body|
-|body.tag|string|"div"|HTML 标签|
-|body.addedClass|string||附加的 CSS 类|
-|body.html|string/Element/jQuery||附加的内容|
-|body.attrs|object|{class: 'modal-body'}|配置 body 元素的属性|
+|*body*.show|boolean|true|是否显示 body|
+|*body*.tag|string|"div"|HTML 标签|
+|*body*.addedClass|string||附加的 CSS 类|
+|*body*.html|string/Element/jQuery||附加的内容|
+|*body*.attrs|object|{class: 'modal-body'}|配置 body 元素的属性|
 |footer|object|{...}|footer 的配置项|
-|footer.show|boolean|true|是否显示 footer|
-|footer.tag|string|"div"|HTML 标签|
-|footer.addedClass|string||附加的 CSS 类|
-|footer.html|string/Element/jQuery||附加的内容|
-|footer.attrs|object|{class: 'modal-footer'}|配置 footer 元素的属性|
+|*footer*.show|boolean|true|是否显示 footer|
+|*footer*.tag|string|"div"|HTML 标签|
+|*footer*.addedClass|string||附加的 CSS 类|
+|*footer*.html|string/Element/jQuery||附加的内容|
+|*footer*.attrs|object|{class: 'modal-footer'}|配置 footer 元素的属性|
 |buttons|object[]|[{<br>&nbsp;&nbsp;html: '确定',<br>&nbsp;&nbsp;attrs: {<br>&nbsp;&nbsp;&nbsp;&nbsp;class: 'btn btn-primary',<br>&nbsp;&nbsp;&nbsp;&nbsp;type: 'button'<br>&nbsp;&nbsp;}<br>}]|footer 按钮的配置项|
-|buttons[i].addedClass|string||附加的 CSS 类|
-|buttons[i].html|string/Element/jQuery||附加的内容|
-|buttons[i].onClick|function||点击事件处理函数|
-|buttons[i].attrs|object||配置按钮元素的属性|
+|*buttons[i]*.addedClass|string||附加的 CSS 类|
+|*buttons[i]*.html|string/Element/jQuery||附加的内容|
+|*buttons[i]*.onClick|function||点击事件处理函数|
+|*buttons[i]*.attrs|object||配置按钮元素的属性|
 
 #### 静态方法
 |方法|参数说明|方法说明|
