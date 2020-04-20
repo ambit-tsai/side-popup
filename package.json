@@ -2,10 +2,12 @@
   "name": "side-popup",
   "version": "0.0.1",
   "description": "Side Popup",
-  "module": "src/SidePopup.js",
+  "main": "dist/side-popup.min.js",
+  "module": "dist/side-popup.mjs",
   "scripts": {
     "dev": "rollup -w -c scripts/rollup.dev.js",
-    "prod": "rollup -c scripts/rollup.prod.js"
+    "prod:min": "rollup -c scripts/rollup.min.js",
+    "prod:esm": "rollup -c scripts/rollup.esm.js"
   },
   "author": "ambit_tsai@qq.com",
   "license": "Apache-2.0",
