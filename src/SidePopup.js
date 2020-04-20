@@ -9,7 +9,7 @@ export default class SidePopup {
 
 
     constructor(opts) {
-        this.options = $.extend(true, opts, options);
+        this.options = $.extend(true, {}, options, opts);
         this.element = initDOM(this);
         this.element.data(SidePopup.id, this);  // 挂载组件对象到元素上
         this.element.appendTo(document.body);
@@ -61,7 +61,7 @@ export default class SidePopup {
      * @param {object} opts 
      */
     openSubPopup(opts) {
-        $.extend(true, opts, options);
+        opts = $.extend(true, {}, options, opts);
         this.element.append(initDialog(opts));
     }
 
