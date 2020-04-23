@@ -110,3 +110,16 @@ export function appendStyles(id) {
     html = html.replace(/ID/g, id);
     $(document.body).append(html);
 }
+
+
+/**
+ * 等待渲染
+ * @param {function} fn 
+ */
+export function waitForRender(fn) {
+    if (Promise) {
+        Promise.resolve().then(fn)
+    } else {
+        setTimeout(fn);
+    }
+}

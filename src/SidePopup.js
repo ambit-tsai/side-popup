@@ -1,6 +1,6 @@
 import options from './options';
 import $ from 'jquery';
-import {initDOM, initDialog, appendStyles} from './functions';
+import {initDOM, initDialog, appendStyles, waitForRender} from './functions';
 
 
 export default class SidePopup {
@@ -15,6 +15,9 @@ export default class SidePopup {
         this.element.appendTo(document.body);
         if (!$(`style.${SidePopup.id}`).length) {
             appendStyles(SidePopup.id);
+        }
+        if (typeof opts.afterRender === 'function') {
+            waitForRender(opts.afterRender);
         }
     }
 
