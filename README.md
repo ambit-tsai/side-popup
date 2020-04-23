@@ -1,5 +1,5 @@
 # 侧边弹窗
-侧边弹窗组件，基于 Bootstrap v3
+侧边弹窗组件，基于 Bootstrap v3 的模态框
 
 
 #### 安装
@@ -52,7 +52,7 @@ SidePopup.close('#myPopup');        // 关闭指定弹窗
 |名称|类型|默认值|说明|
 |-|-|-|-|
 |type|string|"right"|选择左右弹窗，可选："left"、"right"|
-|width|number/string||宽度|
+|width|number/string||宽度。如：300、"100px"、"30%"|
 |addedClass|string||附加的 CSS 类|
 |attrs|object|{<br>&nbsp;&nbsp;class: 'modal',<br>&nbsp;&nbsp;tabindex: '-1'<br>}|配置弹窗元素的属性|
 |header|object|{...}|header 的配置项|
