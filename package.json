@@ -1,6 +1,6 @@
 {
   "name": "side-popup",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Side Popup",
   "main": "dist/side-popup.min.js",
   "module": "dist/side-popup.mjs",
@@ -9,7 +9,7 @@
     "prod:min": "rollup -c scripts/rollup.min.js",
     "prod:esm": "rollup -c scripts/rollup.esm.js"
   },
-  "author": "ambit_tsai@qq.com",
+  "author": "Ambit Tsai <ambit_tsai@qq.com>",
   "license": "Apache-2.0",
   "devDependencies": {
     "@babel/core": "^7.9.0",
@@ -19,5 +19,18 @@
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-string": "^3.0.0",
     "rollup-plugin-terser": "^5.3.0"
-  }
+  },
+  "keywords": [
+    "side-popup",
+    "popup",
+    "侧弹窗"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ambit-tsai/side-popup.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ambit-tsai/side-popup/issues"
+  },
+  "homepage": "https://github.com/ambit-tsai/side-popup#readme"
 }

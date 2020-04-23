@@ -1,3 +1,4 @@
+import banner from './banner';
 import {string} from 'rollup-plugin-string';
 import babel from 'rollup-plugin-babel';
 
@@ -11,6 +12,7 @@ export default {
         globals: {
             jquery: 'jQuery',
         },
+        banner,
         sourcemap: true,
     },
     external: [
