@@ -6,8 +6,7 @@
   "module": "dist/side-popup.mjs",
   "scripts": {
     "dev": "rollup -w -c scripts/rollup.dev.js",
-    "prod:min": "rollup -c scripts/rollup.min.js",
-    "prod:esm": "rollup -c scripts/rollup.esm.js"
+    "prod": "rollup -c scripts/rollup.min.js&& rollup -c scripts/rollup.esm.js"
   },
   "author": "Ambit Tsai <ambit_tsai@qq.com>",
   "license": "Apache-2.0",

@@ -23,7 +23,7 @@
 
   var options = {
     attrs: {
-      class: 'modal',
+      class: 'modal fade',
       tabindex: '-1'
     },
     header: {
@@ -57,7 +57,7 @@
     }]
   };
 
-  var styles = "\r\n.ID.modal {\r\n    display: flex;\r\n    background-color: rgba(0,0,0,.5);\r\n    overflow: auto;\r\n}\r\n.ID.right {\r\n    flex-direction: row-reverse;\r\n}\r\n\r\n\r\n.ID > .modal-dialog {\r\n    flex-shrink: 0;\r\n    margin: 0;\r\n}\r\n.ID.left > .modal-dialog {\r\n    animation: ID_left_first 1s;\r\n}\r\n.ID.right > .modal-dialog {\r\n    animation: ID_right_first 1s;\r\n}\r\n.ID.left > .modal-dialog + .modal-dialog {\r\n    margin-left: -5%;\r\n    animation: ID_left_other 1s;\r\n}\r\n.ID.right > .modal-dialog + .modal-dialog {\r\n    margin-right: -5%;\r\n    animation: ID_right_other 1s;\r\n}\r\n.ID > .modal-dialog:nth-last-child(n+2):after {\r\n    content: '';\r\n    display: block;\r\n    position: absolute;\r\n    top: 0;\r\n    bottom: 0;\r\n    left: 0;\r\n    right: 0;\r\n    background-color: rgba(0,0,0,.1);\r\n}\r\n\r\n\r\n.ID > .modal-dialog > .modal-content {\r\n    display: flex;\r\n    flex-direction: column;\r\n    height: 100%;\r\n}\r\n.ID.left > .modal-dialog > .modal-content {\r\n    border-top-left-radius: 0;\r\n    border-bottom-left-radius: 0;\r\n}\r\n.ID.right > .modal-dialog > .modal-content {\r\n    border-top-right-radius: 0;\r\n    border-bottom-right-radius: 0;\r\n}\r\n\r\n\r\n.ID > .modal-dialog > .modal-content > .modal-body {\r\n    height: 0;\r\n    flex-grow: 1;\r\n    overflow: auto;\r\n}\r\n\r\n\r\n@keyframes ID_left_first {\r\n    0% {\r\n        transform: translateX(-100%);\r\n    }\r\n    100% {\r\n        transform: translateX(0);\r\n    }\r\n}\r\n@keyframes ID_right_first {\r\n    0% {\r\n        transform: translateX(100%);\r\n    }\r\n    100% {\r\n        transform: translateX(0);\r\n    }\r\n}\r\n@keyframes ID_left_other {\r\n    0% {\r\n        transform: translateX(-50%) rotateY(90deg);\r\n    }\r\n    100% {\r\n        transform: translateX(0) rotateY(0);\r\n    }\r\n}\r\n@keyframes ID_right_other {\r\n    0% {\r\n        transform: translateX(50%) rotateY(90deg);\r\n    }\r\n    100% {\r\n        transform: translateX(0) rotateY(0);\r\n    }\r\n}";
+  var styles = "\r\n.ID.modal {\r\n    display: flex;\r\n    background-color: rgba(0,0,0,.5);\r\n    overflow: auto;\r\n}\r\n.ID.right {\r\n    flex-direction: row-reverse;\r\n}\r\n\r\n\r\n.ID.modal > .modal-dialog {\r\n    flex-shrink: 0;\r\n    margin: 0;\r\n}\r\n.ID.left > .modal-dialog {\r\n    transform: translateX(-25%);\r\n    animation: ID_left .5s ease-out;\r\n}\r\n.ID.right > .modal-dialog {\r\n    transform: translateX(25%);\r\n    animation: ID_right .5s ease-out;\r\n}\r\n.ID.in > .modal-dialog {\r\n    transform: translateX(0);\r\n}\r\n.ID.left > .modal-dialog + .modal-dialog {\r\n    margin-left: -5%;\r\n}\r\n.ID.right > .modal-dialog + .modal-dialog {\r\n    margin-right: -5%;\r\n}\r\n.ID > .modal-dialog:nth-last-child(n+2):after {\r\n    content: '';\r\n    display: block;\r\n    position: absolute;\r\n    top: 0;\r\n    bottom: 0;\r\n    left: 0;\r\n    right: 0;\r\n    background-color: rgba(0,0,0,.1);\r\n}\r\n\r\n\r\n.ID > .modal-dialog > .modal-content {\r\n    display: flex;\r\n    flex-direction: column;\r\n    height: 100%;\r\n}\r\n.ID.left > .modal-dialog > .modal-content {\r\n    border-top-left-radius: 0;\r\n    border-bottom-left-radius: 0;\r\n}\r\n.ID.right > .modal-dialog > .modal-content {\r\n    border-top-right-radius: 0;\r\n    border-bottom-right-radius: 0;\r\n}\r\n\r\n\r\n.ID > .modal-dialog > .modal-content > .modal-body {\r\n    height: 0;\r\n    flex-grow: 1;\r\n    overflow: auto;\r\n}\r\n\r\n\r\n@keyframes ID_left {\r\n    0% {\r\n        transform: translateX(-50%);\r\n    }\r\n    100% {\r\n        transform: translateX(0);\r\n    }\r\n}\r\n@keyframes ID_right {\r\n    0% {\r\n        transform: translateX(50%);\r\n    }\r\n    100% {\r\n        transform: translateX(0);\r\n    }\r\n}\r\n";
 
   /**
    * 初始化 DOM
@@ -76,7 +76,7 @@
   /**
    * 初始化 modal-dialog
    * @param {object} opts 
-   * @param {SidePopup} instance 
+   * @param {SidePopup} [instance] 
    * @returns {jQuery}
    */
 
@@ -108,7 +108,7 @@
   /**
    * 初始化 modal-header
    * @param {object} opts 
-   * @param {SidePopup} instance 
+   * @param {SidePopup} [instance] 
    * @returns {jQuery}
    */
 
@@ -121,7 +121,7 @@
       if (instance) {
         $btn.click(_ => instance.close());
       } else {
-        $btn.click(function () {
+        $btn.click(_ => {
           $header.parent().parent().remove();
         });
       }
@@ -177,17 +177,33 @@
     html = html.replace(/ID/g, id);
     $(document.body).append(html);
   }
+  /**
+   * 等待渲染
+   * @param {function} fn 
+   */
+
+  function waitForRender(fn) {
+    if (Promise) {
+      Promise.resolve().then(fn);
+    } else {
+      setTimeout(fn);
+    }
+  }
 
   class SidePopup {
     constructor(opts) {
+      if (!$(`style.${SidePopup.id}`).length) {
+        appendStyles(SidePopup.id); // 添加样式
+      }
+
       this.options = $.extend(true, {}, options, opts);
       this.element = initDOM(this);
       this.element.data(SidePopup.id, this); // 挂载组件对象到元素上
 
       this.element.appendTo(document.body);
 
-      if (!$(`style.${SidePopup.id}`).length) {
-        appendStyles(SidePopup.id);
+      if (typeof opts.afterRender === 'function') {
+        waitForRender(opts.afterRender);
       }
     }
     /**
@@ -196,8 +212,8 @@
 
 
     open() {
+      this.show();
       this.element.appendTo(document.body);
-      this.element.show();
     }
     /**
      * 关闭弹窗（从 document 中移除）
@@ -206,7 +222,6 @@
 
     close() {
       this.element.remove();
-      this.element.children('.modal-dialog').not(':first').remove();
     }
     /**
      * 显示弹窗
@@ -214,7 +229,7 @@
 
 
     show() {
-      this.element.show();
+      this.element.addClass('in');
     }
     /**
      * 隐藏弹窗
@@ -222,7 +237,7 @@
 
 
     hide() {
-      this.element.hide();
+      this.element.removeClass('in');
     }
     /**
      * 打开子弹窗
@@ -261,7 +276,7 @@
       }
 
       if (popup) {
-        popup.open();
+        popup.show();
         return popup;
       } else {
         throw new Error('组件对象不存在');
