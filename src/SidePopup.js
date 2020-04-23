@@ -62,6 +62,9 @@ export default class SidePopup {
     openSubPopup(opts) {
         opts = $.extend(true, {}, options, opts);
         this.element.append(initDialog(opts));
+        if (typeof opts.afterRender === 'function') {
+            waitForRender(opts.afterRender);
+        }
     }
 
 
