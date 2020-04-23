@@ -9,13 +9,13 @@ export default class SidePopup {
 
 
     constructor(opts) {
+        if (!$(`style.${SidePopup.id}`).length) {
+            appendStyles(SidePopup.id);         // 添加样式
+        }
         this.options = $.extend(true, {}, options, opts);
         this.element = initDOM(this);
         this.element.data(SidePopup.id, this);  // 挂载组件对象到元素上
         this.element.appendTo(document.body);
-        if (!$(`style.${SidePopup.id}`).length) {
-            appendStyles(SidePopup.id);
-        }
         if (typeof opts.afterRender === 'function') {
             waitForRender(opts.afterRender);
         }
@@ -26,8 +26,8 @@ export default class SidePopup {
      * 打开弹窗（插入到 document 中）
      */
     open() {
+        this.show();
         this.element.appendTo(document.body);
-        this.element.show();
     }
 
 
@@ -36,10 +36,6 @@ export default class SidePopup {
      */
     close() {
         this.element.remove();
-        this.element
-            .children('.modal-dialog')
-            .not(':first')
-            .remove();
     }
 
 
@@ -47,7 +43,7 @@ export default class SidePopup {
      * 显示弹窗
      */
     show() {
-        this.element.show();
+        this.element.addClass('in');
     }
 
 
@@ -55,7 +51,7 @@ export default class SidePopup {
      * 隐藏弹窗
      */
     hide() {
-        this.element.hide();
+        this.element.removeClass('in');
     }
 
 
@@ -96,7 +92,7 @@ export default class SidePopup {
             throw new TypeError('错误的参数类型');
         }
         if (popup) {
-            popup.open();
+            popup.show();
             return popup;
         } else {
             throw new Error('组件对象不存在');

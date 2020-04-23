@@ -20,7 +20,7 @@ export function initDOM(instance) {
 /**
  * 初始化 modal-dialog
  * @param {object} opts 
- * @param {SidePopup} instance 
+ * @param {SidePopup} [instance] 
  * @returns {jQuery}
  */
 export function initDialog(opts, instance) {
@@ -47,7 +47,7 @@ export function initDialog(opts, instance) {
 /**
  * 初始化 modal-header
  * @param {object} opts 
- * @param {SidePopup} instance 
+ * @param {SidePopup} [instance] 
  * @returns {jQuery}
  */
 function initHeader(opts, instance) {
@@ -57,7 +57,7 @@ function initHeader(opts, instance) {
         if (instance) {
             $btn.click(_ => instance.close());
         } else {
-            $btn.click(function () {
+            $btn.click(_ => {
                 $header.parent().parent().remove();
             });
         }

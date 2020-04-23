@@ -1,6 +1,6 @@
 export default {
     attrs: {
-        class: 'modal',
+        class: 'modal fade',
         tabindex: '-1',
     },
     header: {

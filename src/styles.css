@@ -9,23 +9,26 @@
 }
 
 
-.ID > .modal-dialog {
+.ID.modal > .modal-dialog {
     flex-shrink: 0;
     margin: 0;
 }
 .ID.left > .modal-dialog {
-    animation: ID_left_first 1s;
+    transform: translateX(-25%);
+    animation: ID_left .5s ease-out;
 }
 .ID.right > .modal-dialog {
-    animation: ID_right_first 1s;
+    transform: translateX(25%);
+    animation: ID_right .5s ease-out;
+}
+.ID.in > .modal-dialog {
+    transform: translateX(0);
 }
 .ID.left > .modal-dialog + .modal-dialog {
     margin-left: -5%;
-    animation: ID_left_other 1s;
 }
 .ID.right > .modal-dialog + .modal-dialog {
     margin-right: -5%;
-    animation: ID_right_other 1s;
 }
 .ID > .modal-dialog:nth-last-child(n+2):after {
     content: '';
@@ -61,35 +64,19 @@
 }
 
 
-@keyframes ID_left_first {
+@keyframes ID_left {
     0% {
-        transform: translateX(-100%);
+        transform: translateX(-50%);
     }
     100% {
         transform: translateX(0);
     }
 }
-@keyframes ID_right_first {
+@keyframes ID_right {
     0% {
-        transform: translateX(100%);
+        transform: translateX(50%);
     }
     100% {
         transform: translateX(0);
-    }
-}
-@keyframes ID_left_other {
-    0% {
-        transform: translateX(-50%) rotateY(90deg);
-    }
-    100% {
-        transform: translateX(0) rotateY(0);
-    }
-}
-@keyframes ID_right_other {
-    0% {
-        transform: translateX(50%) rotateY(90deg);
-    }
-    100% {
-        transform: translateX(0) rotateY(0);
     }
 }
