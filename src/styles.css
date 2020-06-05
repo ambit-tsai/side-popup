@@ -15,11 +15,11 @@
 }
 .ID.left > .modal-dialog {
     transform: translateX(-25%);
-    animation: ID_left .5s ease-out;
+    animation: ID--left .5s ease-out;
 }
 .ID.right > .modal-dialog {
     transform: translateX(25%);
-    animation: ID_right .5s ease-out;
+    animation: ID--right .5s ease-out;
 }
 .ID.in > .modal-dialog {
     transform: translateX(0);
@@ -64,7 +64,7 @@
 }
 
 
-@keyframes ID_left {
+@keyframes ID--left {
     0% {
         transform: translateX(-50%);
     }
@@ -72,7 +72,7 @@
         transform: translateX(0);
     }
 }
-@keyframes ID_right {
+@keyframes ID--right {
     0% {
         transform: translateX(50%);
     }

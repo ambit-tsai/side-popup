@@ -17,13 +17,15 @@
     <script src="side-popup.js" type="text/javascript"></script>
     <script type="text/javascript">
         var sp = SidePopup.open({
-            type: 'left',
+            attrs: {
+                id: 'myPopup',
+            },
             header: {
-                title:'Caifanwei',
+                title: '弹窗1',
             },
             body: {
-                html:'asdfghjkl234jhhasldfjalsjfdalsjdflaksjdflkasjdfkljasldkfjalksdjflkasjfaskldjf',
-            }
+                html: '<h1>Hello World</h1>',
+            },
         });
     </script>
 </body>

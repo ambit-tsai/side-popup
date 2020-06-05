@@ -51,10 +51,11 @@ SidePopup.close('#myPopup');        // 关闭指定弹窗
 #### 配置项说明
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|type|string|"right"|选择左右弹窗，可选："left"、"right"|
+|type|string|"right"|选择左右弹窗，可选："left"、"right"<br><small>*（子弹窗不适应）*</small>|
+|backdrop|boolean|false|点击背景关闭弹窗<br><small>*（子弹窗不适应）*</small>|
 |width|number/string||宽度。如：300、"100px"、"30%"|
 |addedClass|string||附加的 CSS 类|
-|attrs|object|{<br>&nbsp;&nbsp;class: 'modal',<br>&nbsp;&nbsp;tabindex: '-1'<br>}|配置弹窗元素的属性|
+|attrs|object|{class: 'modal-dialog'}|配置弹窗元素的属性|
 |afterRender|function||等待GUI渲染后执行|
 |header|object|{...}|header 的配置项|
 |*header*.show|boolean|true|是否显示 header|

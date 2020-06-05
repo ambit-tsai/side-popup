@@ -1,7 +1,7 @@
 export default {
+    backdrop: false,
     attrs: {
-        class: 'modal fade',
-        tabindex: '-1',
+        class: 'modal-dialog',
     },
     header: {
         show: true,

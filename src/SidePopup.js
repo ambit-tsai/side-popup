@@ -1,11 +1,15 @@
 import options from './options';
 import $ from 'jquery';
-import {initDOM, initDialog, appendStyles, waitForRender} from './functions';
+import {appendStyles, initSidePopup, waitForRender} from './functions';
+import SubPopup from './SubPopup';
 
 
 export default class SidePopup {
     static id = 'SIDE_POPUP';
     static defaultOptions = options;
+    options;
+    element;
+    _subPopupList = [];
 
 
     constructor(opts) {
@@ -13,8 +17,7 @@ export default class SidePopup {
             appendStyles(SidePopup.id);         // 添加样式
         }
         this.options = $.extend(true, {}, options, opts);
-        this.element = initDOM(this);
-        this.element.data(SidePopup.id, this);  // 挂载组件对象到元素上
+        this.element = initSidePopup(this);
         this.element.appendTo(document.body);
         if (typeof opts.afterRender === 'function') {
             waitForRender(opts.afterRender);
@@ -60,8 +63,9 @@ export default class SidePopup {
      * @param {object} opts 
      */
     openSubPopup(opts) {
-        opts = $.extend(true, {}, options, opts);
-        this.element.append(initDialog(opts));
+        const subPopup = new SubPopup(opts);
+        this._subPopupList.push(subPopup);
+        this.element.append(subPopup.element);
         if (typeof opts.afterRender === 'function') {
             waitForRender(opts.afterRender);
         }
@@ -72,11 +76,8 @@ export default class SidePopup {
      * 关闭子弹窗
      */
     closeSubPopup() {
-        this.element
-            .children('.modal-dialog')
-            .not(':first')
-            .last()
-            .remove();
+        const subPopup = this._subPopupList.pop();
+        if (subPopup) subPopup.close();
     }
 
 
@@ -95,7 +96,7 @@ export default class SidePopup {
             throw new TypeError('错误的参数类型');
         }
         if (popup) {
-            popup.show();
+            popup.open();
             return popup;
         } else {
             throw new Error('组件对象不存在');

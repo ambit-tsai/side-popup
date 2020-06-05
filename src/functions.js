@@ -3,64 +3,45 @@ import styles from './styles.css';
 
 
 /**
- * 初始化 DOM
- * @param {SidePopup} instance 
- * @returns {jQuery}
- */
-export function initDOM(instance) {
-    const opts = instance.options;
-    const $el = $(`<div ${$.map(opts.attrs, (v, k) => `${k}="${v}"`).join(' ')}></div>`);
-    $el.addClass(instance.constructor.id);
-    $el.addClass(opts.type === 'left' ? 'left' : 'right');
-    if (opts.addedClass) $el.addClass(opts.addedClass);
-    return $el.append(initDialog(opts, instance));
-}
-
-
-/**
  * 初始化 modal-dialog
- * @param {object} opts 
- * @param {SidePopup} [instance] 
+ * @param {SidePopup|SubPopup} instance
  * @returns {jQuery}
  */
-export function initDialog(opts, instance) {
+export function initDialog(instance) {
+    const opts = instance.options;
     const $content = $('<div class="modal-content"></div>');
     if (opts.header.show) {
-        $content.append(initHeader(opts.header, instance));
+        $content.append(initHeader(instance));
     }
     if (opts.body.show) {
         $content.append(initBody(opts.body));
     }
     if (opts.footer.show) {
-        const $footer = initBody(opts.footer);    // footer 的处理逻辑与 body 一样
+        const $footer = initBody(opts.footer);    // footer 的初始化逻辑与 body 一样
         if (opts.buttons) {
             initButtons($footer, opts.buttons);
         }
         $content.append($footer);
     }
-    const $dialog = $('<div class="modal-dialog"></div>').append($content);
+
+    const $dialog = $(`<div ${$.map(opts.attrs, (v, k) => `${k}="${v}"`).join(' ')}></div>`);
     if (opts.width) $dialog.css('width', opts.width);
-    return $dialog;
+    if (opts.addedClass) $el.addClass(opts.addedClass);
+    return $dialog.append($content);
 }
 
 
 /**
  * 初始化 modal-header
- * @param {object} opts 
- * @param {SidePopup} [instance] 
+ * @param {SubPopup} instance
  * @returns {jQuery}
  */
-function initHeader(opts, instance) {
+function initHeader(instance) {
+    const opts = instance.options.header;
     const $header = $(`<${opts.tag} ${$.map(opts.attrs, (v, k) => `${k}="${v}"`).join(' ')}></${opts.tag}>`);
     if (opts.showCloseBtn) {
         const $btn = $('<button class="close" type="button">&times;</button>');
-        if (instance) {
-            $btn.click(_ => instance.close());
-        } else {
-            $btn.click(_ => {
-                $header.parent().parent().remove();
-            });
-        }
+        $btn.click(_ => instance.close());
         $header.append($btn);
     }
     if (opts.title) {
@@ -109,6 +90,34 @@ export function appendStyles(id) {
     let html = `<style class="ID" type="text/css">${styles}</style>`;
     html = html.replace(/ID/g, id);
     $(document.body).append(html);
+}
+
+
+/**
+ * 初始化 SidePopup
+ * @param {SidePopup} instance 
+ * @returns {jQuery}
+ */
+export function initSidePopup(instance) {
+    const opts = instance.options;
+    const id = instance.constructor.id;
+    const $el = $(`<div class="modal fade" tabindex="-1"></div>`);
+    $el.addClass(id);
+    $el.addClass(opts.type === 'left' ? 'left' : 'right');
+    if (opts.backdrop) {
+        $el.click(function (event) {
+            if (this !== event.target) return;
+            if (instance._subPopupList.length) {
+                instance.closeSubPopup();
+            } else {
+                instance.close();
+            }
+        });
+    }
+
+    const $dialog = initDialog(instance);
+    $dialog.data(id, instance); // 挂载组件实例到弹窗上
+    return $el.append($dialog);
 }
 
 

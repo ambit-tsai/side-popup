@@ -9,7 +9,7 @@ const config = JSON.parse(fileStr);
 
 export default `
 /**
- * ${config.name}
+ * ${config.description}
  * @version ${config.version}
  * @author ${config.author}
  * @license ${config.license}

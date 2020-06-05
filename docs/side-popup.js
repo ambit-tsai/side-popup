@@ -2,9 +2,9 @@
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('jquery')) :
   typeof define === 'function' && define.amd ? define(['jquery'], factory) :
   (global = global || self, global.SidePopup = factory(global.jQuery));
-}(this, (function ($) { 'use strict';
+}(this, (function ($$1) { 'use strict';
 
-  $ = $ && Object.prototype.hasOwnProperty.call($, 'default') ? $['default'] : $;
+  $$1 = $$1 && Object.prototype.hasOwnProperty.call($$1, 'default') ? $$1['default'] : $$1;
 
   function _defineProperty(obj, key, value) {
     if (key in obj) {
@@ -22,9 +22,9 @@
   }
 
   var options = {
+    backdrop: false,
     attrs: {
-      class: 'modal fade',
-      tabindex: '-1'
+      class: 'modal-dialog'
     },
     header: {
       show: true,
@@ -57,34 +57,20 @@
     }]
   };
 
-  var styles = "\r\n.ID.modal {\r\n    display: flex;\r\n    background-color: rgba(0,0,0,.5);\r\n    overflow: auto;\r\n}\r\n.ID.right {\r\n    flex-direction: row-reverse;\r\n}\r\n\r\n\r\n.ID.modal > .modal-dialog {\r\n    flex-shrink: 0;\r\n    margin: 0;\r\n}\r\n.ID.left > .modal-dialog {\r\n    transform: translateX(-25%);\r\n    animation: ID_left .5s ease-out;\r\n}\r\n.ID.right > .modal-dialog {\r\n    transform: translateX(25%);\r\n    animation: ID_right .5s ease-out;\r\n}\r\n.ID.in > .modal-dialog {\r\n    transform: translateX(0);\r\n}\r\n.ID.left > .modal-dialog + .modal-dialog {\r\n    margin-left: -5%;\r\n}\r\n.ID.right > .modal-dialog + .modal-dialog {\r\n    margin-right: -5%;\r\n}\r\n.ID > .modal-dialog:nth-last-child(n+2):after {\r\n    content: '';\r\n    display: block;\r\n    position: absolute;\r\n    top: 0;\r\n    bottom: 0;\r\n    left: 0;\r\n    right: 0;\r\n    background-color: rgba(0,0,0,.1);\r\n}\r\n\r\n\r\n.ID > .modal-dialog > .modal-content {\r\n    display: flex;\r\n    flex-direction: column;\r\n    height: 100%;\r\n}\r\n.ID.left > .modal-dialog > .modal-content {\r\n    border-top-left-radius: 0;\r\n    border-bottom-left-radius: 0;\r\n}\r\n.ID.right > .modal-dialog > .modal-content {\r\n    border-top-right-radius: 0;\r\n    border-bottom-right-radius: 0;\r\n}\r\n\r\n\r\n.ID > .modal-dialog > .modal-content > .modal-body {\r\n    height: 0;\r\n    flex-grow: 1;\r\n    overflow: auto;\r\n}\r\n\r\n\r\n@keyframes ID_left {\r\n    0% {\r\n        transform: translateX(-50%);\r\n    }\r\n    100% {\r\n        transform: translateX(0);\r\n    }\r\n}\r\n@keyframes ID_right {\r\n    0% {\r\n        transform: translateX(50%);\r\n    }\r\n    100% {\r\n        transform: translateX(0);\r\n    }\r\n}\r\n";
+  var styles = "\r\n.ID.modal {\r\n    display: flex;\r\n    background-color: rgba(0,0,0,.5);\r\n    overflow: auto;\r\n}\r\n.ID.right {\r\n    flex-direction: row-reverse;\r\n}\r\n\r\n\r\n.ID.modal > .modal-dialog {\r\n    flex-shrink: 0;\r\n    margin: 0;\r\n}\r\n.ID.left > .modal-dialog {\r\n    transform: translateX(-25%);\r\n    animation: ID--left .5s ease-out;\r\n}\r\n.ID.right > .modal-dialog {\r\n    transform: translateX(25%);\r\n    animation: ID--right .5s ease-out;\r\n}\r\n.ID.in > .modal-dialog {\r\n    transform: translateX(0);\r\n}\r\n.ID.left > .modal-dialog + .modal-dialog {\r\n    margin-left: -5%;\r\n}\r\n.ID.right > .modal-dialog + .modal-dialog {\r\n    margin-right: -5%;\r\n}\r\n.ID > .modal-dialog:nth-last-child(n+2):after {\r\n    content: '';\r\n    display: block;\r\n    position: absolute;\r\n    top: 0;\r\n    bottom: 0;\r\n    left: 0;\r\n    right: 0;\r\n    background-color: rgba(0,0,0,.1);\r\n}\r\n\r\n\r\n.ID > .modal-dialog > .modal-content {\r\n    display: flex;\r\n    flex-direction: column;\r\n    height: 100%;\r\n}\r\n.ID.left > .modal-dialog > .modal-content {\r\n    border-top-left-radius: 0;\r\n    border-bottom-left-radius: 0;\r\n}\r\n.ID.right > .modal-dialog > .modal-content {\r\n    border-top-right-radius: 0;\r\n    border-bottom-right-radius: 0;\r\n}\r\n\r\n\r\n.ID > .modal-dialog > .modal-content > .modal-body {\r\n    height: 0;\r\n    flex-grow: 1;\r\n    overflow: auto;\r\n}\r\n\r\n\r\n@keyframes ID--left {\r\n    0% {\r\n        transform: translateX(-50%);\r\n    }\r\n    100% {\r\n        transform: translateX(0);\r\n    }\r\n}\r\n@keyframes ID--right {\r\n    0% {\r\n        transform: translateX(50%);\r\n    }\r\n    100% {\r\n        transform: translateX(0);\r\n    }\r\n}\r\n";
 
-  /**
-   * 初始化 DOM
-   * @param {SidePopup} instance 
-   * @returns {jQuery}
-   */
-
-  function initDOM(instance) {
-    const opts = instance.options;
-    const $el = $(`<div ${$.map(opts.attrs, (v, k) => `${k}="${v}"`).join(' ')}></div>`);
-    $el.addClass(instance.constructor.id);
-    $el.addClass(opts.type === 'left' ? 'left' : 'right');
-    if (opts.addedClass) $el.addClass(opts.addedClass);
-    return $el.append(initDialog(opts, instance));
-  }
   /**
    * 初始化 modal-dialog
-   * @param {object} opts 
-   * @param {SidePopup} [instance] 
+   * @param {SidePopup|SubPopup} instance
    * @returns {jQuery}
    */
 
-  function initDialog(opts, instance) {
-    const $content = $('<div class="modal-content"></div>');
+  function initDialog(instance) {
+    const opts = instance.options;
+    const $content = $$1('<div class="modal-content"></div>');
 
     if (opts.header.show) {
-      $content.append(initHeader(opts.header, instance));
+      $content.append(initHeader(instance));
     }
 
     if (opts.body.show) {
@@ -92,7 +78,7 @@
     }
 
     if (opts.footer.show) {
-      const $footer = initBody(opts.footer); // footer 的处理逻辑与 body 一样
+      const $footer = initBody(opts.footer); // footer 的初始化逻辑与 body 一样
 
       if (opts.buttons) {
         initButtons($footer, opts.buttons);
@@ -101,31 +87,24 @@
       $content.append($footer);
     }
 
-    const $dialog = $('<div class="modal-dialog"></div>').append($content);
+    const $dialog = $$1(`<div ${$$1.map(opts.attrs, (v, k) => `${k}="${v}"`).join(' ')}></div>`);
     if (opts.width) $dialog.css('width', opts.width);
-    return $dialog;
+    if (opts.addedClass) $el.addClass(opts.addedClass);
+    return $dialog.append($content);
   }
   /**
    * 初始化 modal-header
-   * @param {object} opts 
-   * @param {SidePopup} [instance] 
+   * @param {SubPopup} instance
    * @returns {jQuery}
    */
 
-  function initHeader(opts, instance) {
-    const $header = $(`<${opts.tag} ${$.map(opts.attrs, (v, k) => `${k}="${v}"`).join(' ')}></${opts.tag}>`);
+  function initHeader(instance) {
+    const opts = instance.options.header;
+    const $header = $$1(`<${opts.tag} ${$$1.map(opts.attrs, (v, k) => `${k}="${v}"`).join(' ')}></${opts.tag}>`);
 
     if (opts.showCloseBtn) {
-      const $btn = $('<button class="close" type="button">&times;</button>');
-
-      if (instance) {
-        $btn.click(_ => instance.close());
-      } else {
-        $btn.click(_ => {
-          $header.parent().parent().remove();
-        });
-      }
-
+      const $btn = $$1('<button class="close" type="button">&times;</button>');
+      $btn.click(_ => instance.close());
       $header.append($btn);
     }
 
@@ -145,7 +124,7 @@
 
 
   function initBody(opts) {
-    const $el = $(`<${opts.tag} ${$.map(opts.attrs, (v, k) => `${k}="${v}"`).join(' ')}></${opts.tag}>`);
+    const $el = $$1(`<${opts.tag} ${$$1.map(opts.attrs, (v, k) => `${k}="${v}"`).join(' ')}></${opts.tag}>`);
     if (opts.addedClass) $el.addClass(opts.addedClass);
     if (opts.html) $el.append(opts.html);
     return $el;
@@ -158,8 +137,8 @@
 
 
   function initButtons($parent, opts) {
-    $.each(opts, (_, item) => {
-      const $btn = $(`<button ${$.map(item.attrs, (v, k) => `${k}="${v}"`).join(' ')}></button>`);
+    $$1.each(opts, (_, item) => {
+      const $btn = $$1(`<button ${$$1.map(item.attrs, (v, k) => `${k}="${v}"`).join(' ')}></button>`);
       if (item.addedClass) $btn.addClass(item.addedClass);
       if (item.html) $btn.append(item.html);
       if (item.onClick) $btn.click(item.onClick);
@@ -175,7 +154,37 @@
   function appendStyles(id) {
     let html = `<style class="ID" type="text/css">${styles}</style>`;
     html = html.replace(/ID/g, id);
-    $(document.body).append(html);
+    $$1(document.body).append(html);
+  }
+  /**
+   * 初始化 SidePopup
+   * @param {SidePopup} instance 
+   * @returns {jQuery}
+   */
+
+  function initSidePopup(instance) {
+    const opts = instance.options;
+    const id = instance.constructor.id;
+    const $el = $$1(`<div class="modal fade" tabindex="-1"></div>`);
+    $el.addClass(id);
+    $el.addClass(opts.type === 'left' ? 'left' : 'right');
+
+    if (opts.backdrop) {
+      $el.click(function (event) {
+        if (this !== event.target) return;
+
+        if (instance._subPopupList.length) {
+          instance.closeSubPopup();
+        } else {
+          instance.close();
+        }
+      });
+    }
+
+    const $dialog = initDialog(instance);
+    $dialog.data(id, instance); // 挂载组件实例到弹窗上
+
+    return $el.append($dialog);
   }
   /**
    * 等待渲染
@@ -190,16 +199,40 @@
     }
   }
 
+  class SubPopup {
+    constructor(opts) {
+      _defineProperty(this, "options", void 0);
+
+      _defineProperty(this, "element", void 0);
+
+      this.options = $.extend(true, {}, options, opts);
+      this.element = initDialog(this);
+    }
+    /**
+     * 关闭弹窗（从 document 中移除）
+     */
+
+
+    close() {
+      this.element.remove();
+    }
+
+  }
+
   class SidePopup {
     constructor(opts) {
-      if (!$(`style.${SidePopup.id}`).length) {
+      _defineProperty(this, "options", void 0);
+
+      _defineProperty(this, "element", void 0);
+
+      _defineProperty(this, "_subPopupList", []);
+
+      if (!$$1(`style.${SidePopup.id}`).length) {
         appendStyles(SidePopup.id); // 添加样式
       }
 
-      this.options = $.extend(true, {}, options, opts);
-      this.element = initDOM(this);
-      this.element.data(SidePopup.id, this); // 挂载组件对象到元素上
-
+      this.options = $$1.extend(true, {}, options, opts);
+      this.element = initSidePopup(this);
       this.element.appendTo(document.body);
 
       if (typeof opts.afterRender === 'function') {
@@ -246,8 +279,15 @@
 
 
     openSubPopup(opts) {
-      opts = $.extend(true, {}, options, opts);
-      this.element.append(initDialog(opts));
+      const subPopup = new SubPopup(opts);
+
+      this._subPopupList.push(subPopup);
+
+      this.element.append(subPopup.element);
+
+      if (typeof opts.afterRender === 'function') {
+        waitForRender(opts.afterRender);
+      }
     }
     /**
      * 关闭子弹窗
@@ -255,7 +295,9 @@
 
 
     closeSubPopup() {
-      this.element.children('.modal-dialog').not(':first').last().remove();
+      const subPopup = this._subPopupList.pop();
+
+      if (subPopup) subPopup.close();
     }
     /**
      * 打开弹窗
@@ -267,8 +309,8 @@
     static open(param) {
       let popup;
 
-      if (typeof param === 'string' || param instanceof Element || param instanceof $) {
-        popup = $(param).data(SidePopup.id);
+      if (typeof param === 'string' || param instanceof Element || param instanceof $$1) {
+        popup = $$1(param).data(SidePopup.id);
       } else if (param instanceof Object) {
         popup = new SidePopup(param);
       } else {
@@ -276,7 +318,7 @@
       }
 
       if (popup) {
-        popup.show();
+        popup.open();
         return popup;
       } else {
         throw new Error('组件对象不存在');
@@ -289,7 +331,7 @@
 
 
     static close(param) {
-      const popup = $(param).data(SidePopup.id);
+      const popup = $$1(param).data(SidePopup.id);
       if (popup) popup.close();
     }
 

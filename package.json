@@ -1,7 +1,7 @@
 {
   "name": "side-popup",
-  "version": "0.0.2",
-  "description": "Side Popup",
+  "version": "1.0.0",
+  "description": "Side Popup，基于 Bootstrap 的侧弹窗组件",
   "main": "dist/side-popup.min.js",
   "module": "dist/side-popup.mjs",
   "scripts": {
