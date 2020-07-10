@@ -1,4 +1,4 @@
-# 侧边弹窗
+# 侧边弹窗&nbsp;&nbsp;![Version](https://img.shields.io/npm/v/side-popup.svg)
 侧边弹窗组件，基于 Bootstrap v3 的模态框
 
 
