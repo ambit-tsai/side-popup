@@ -1,6 +1,6 @@
 {
   "name": "side-popup",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Side Popup，基于 Bootstrap 的侧弹窗组件",
   "main": "dist/side-popup.min.js",
   "module": "dist/side-popup.mjs",
@@ -14,8 +14,10 @@
     "@babel/core": "^7.9.0",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.9.5",
+    "autoprefixer": "^9.8.4",
     "rollup": "^2.6.1",
     "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-postcss": "^3.1.2",
     "rollup-plugin-string": "^3.0.0",
     "rollup-plugin-terser": "^5.3.0"
   },
@@ -31,5 +33,10 @@
   "bugs": {
     "url": "https://github.com/ambit-tsai/side-popup/issues"
   },
-  "homepage": "https://github.com/ambit-tsai/side-popup#readme"
+  "homepage": "https://github.com/ambit-tsai/side-popup#readme",
+  "browserslist": [
+    "ie >= 10",
+    "chrome >= 4",
+    "firefox >= 17"
+  ]
 }

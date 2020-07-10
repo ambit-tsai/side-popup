@@ -1,5 +1,6 @@
 import banner from './banner';
-import {string} from 'rollup-plugin-string';
+import postcss from 'rollup-plugin-postcss';
+import autoprefixer from 'autoprefixer';
 import babel from 'rollup-plugin-babel';
 
 
@@ -19,10 +20,15 @@ export default {
         'jquery',
     ],
     plugins: [
-        string({
-            include: '**/*.css',
+        postcss({
+            plugins: [
+                autoprefixer,
+            ],
         }),
         babel({
+            presets: [
+                '@babel/preset-env',
+            ],
             plugins: [
                 '@babel/plugin-proposal-class-properties',
             ],

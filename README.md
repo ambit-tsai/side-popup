@@ -37,6 +37,8 @@
 ```
 用法 2
 ```javascript
+import SidePopup from 'side-popup';
+
 SidePopup.open('#myPopup');         // 打开指定弹窗
 SidePopup.close('#myPopup');        // 关闭指定弹窗
 ```
